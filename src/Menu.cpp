@@ -99,38 +99,45 @@ void Menu::generateRandomGraph()
 {
     cout<<"Generowanie losowego grafu"<<endl;
     int numEdgesMax;
-    //numEdgesMax = binomialCoefficients(numVert, 2);
     numEdgesMax = numVert*(numVert-1)/2;
+    cout<<"Maksymalna liczba krawedzi = "<<numEdgesMax<<endl;
 
     switch (edgeDensity)
     {
     case 1:
             {
-            numEdges = ceil(0.25 * numEdgesMax);
+            numEdges = floor(0.25 * numEdgesMax);
             }
             break;
     case 2:
             {
-            numEdges = ceil(0.5 * numEdgesMax);
+            numEdges = floor(0.5 * numEdgesMax);
             }
             break;
     case 3:
             {
-            numEdges = ceil(0.75 * numEdgesMax);
+            numEdges = floor(0.75 * numEdgesMax);
             }
             break;
     case 4:
             {
-            numEdges = ceil(0.99 * numEdgesMax);
+            numEdges = floor(0.99 * numEdgesMax);
             }
             break;
     default:
             cout<<"Nieprawidlowy numer polecenia!"<<endl;
     }
+    fileWrite.open("GraphRandom.txt", ios::out);
+    if (fileWrite.good())
+    {
+    // liczba krawedzi i liczba wierzcholkow
+    cout<<numEdges<<" "<<numVert<<"\n";
+    fileWrite<<numEdges<<" "<<numVert<<"\n";
+    cout<<"\n";
+    fileWrite<<"\n";
 
-    cout<<numEdges<<" "<<numVert<<endl;
-    cout<<endl;
-    int edge;
+    // tworzenie tablicy ktora przechowuje wszystkie mozliwe kombinacje wierzcholek-wierzcholek dla podanej ilosci
+    // np 0-1, 0-2, 3-4 itd. Zawsze mniejsze do wiekszego
     edgeOptionsTable = new EdgeOptions[numEdgesMax];
     int i,j,k;
     for (i = 0; i < numEdgesMax; i++)
@@ -143,36 +150,29 @@ void Menu::generateRandomGraph()
             k++;
         }
     }
-    for (int i = 0; i < numEdgesMax; i++)
+    // pomieszanie kolejnosci
+    for (int m = numEdgesMax-1; m>0; m--)
     {
-
-   for (int m = numEdges; m>0; m--)
-    {
-        //get swap index
         int n = rand()%m;
-        //swap p[i] with p[j]
         EdgeOptions temp;
         temp = edgeOptionsTable[m];
         edgeOptionsTable[m] = edgeOptionsTable[n];
         edgeOptionsTable[n] = temp;
     }
-
-
-        //edge = rand()%100+1;
-
-    }
-    for (int i = 0; i < numEdgesMax; i++)
+    // wypisywanie kolejnych krawedzi
+    for (int i = 0; i < numEdges; i++)
     {
-        cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<endl;
+        int edge = (rand()%100)+1;
+        cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
+        fileWrite<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
     }
+    fileWrite.close();
+    }
+    else cout<<"Nie udalo sie otworzyc pliku!\n";
 
 
 
 
     delete[] edgeOptionsTable;
 }
-/*int Menu::binomialCoefficients(int n, int k) {
-   if (k == 0 || k == n) return 1;
-   return (binomialCoefficients(n - 1, k - 1) + binomialCoefficients(n - 1, k));
-}*/
 
