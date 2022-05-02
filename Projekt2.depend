@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1651485488 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\main.cpp
+	<iostream>
+	"Menu.h"
+	<bits/stdc++.h>
+
+1651444778 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+	<iostream>
+	"DijkstraImplementation.h"
+	<fstream>
+
+1651430989 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+
+1651338334 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\bellmanfordimplementation.cpp
+	<iostream>
+	"BellmanFordImplementation.h"
+
+1651167773 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\bellmanfordimplementation.h
+
+1651338334 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\kruskalimplementation.cpp
+	<iostream>
+	"KruskalImplementation.h"
+
+1651167786 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\kruskalimplementation.h
+
+1651312087 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\mstmenu.cpp
+	<iostream>
+	"MSTMenu.h"
+	"Menu.h"
+
+1651311685 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\mstmenu.h
+
+1651338334 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primaimplementation.cpp
+	<iostream>
+	"PrimaImplementation.h"
+
+1651167754 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primaimplementation.h
+
+1651312087 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
+	<iostream>
+	"ShortestPathMenu.h"
+	"Menu.h"
+
+1651311685 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\shortestpathmenu.h
+
+1651485565 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\menu.cpp
+	<iostream>
+	<fstream>
+	<math.h>
+	"Menu.h"
+	"ShortestPathMenu.h"
+	"MSTMenu.h"
+	"DijkstraImplementation.h"
+
+1651485433 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\menu.h
+
