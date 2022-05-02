@@ -10,9 +10,9 @@ DijkstraImplementation::DijkstraImplementation(int wF)
 {
 
     whichFile = wF;
-    //getFileInfo();
+    getFileInfo();
     cout<<"Graf z pliku"<<endl;
-    //printMatrix();
+    printMatrix();
 
 }
 
