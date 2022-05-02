@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<math.h>
+#include<time.h>
 
 #include "Menu.h"
 #include "ShortestPathMenu.h"
@@ -12,6 +13,12 @@ using namespace std;
 
 int work;
 fstream fileWrite;
+
+struct EdgeOptions
+{
+    int v1;
+    int v2;
+};
 
 Menu::Menu()
 {
@@ -47,7 +54,7 @@ Menu::Menu()
             cout<<"3. 75%"<<endl;
             cout<<"4. 99%"<<endl;
             cin>>edgeDensity;
-
+            srand(time(NULL));
             generateRandomGraph();
         }
         }
@@ -91,7 +98,8 @@ void Menu::generateRandomGraph()
 {
     cout<<"Generowanie losowego grafu"<<endl;
     int numEdgesMax;
-    numEdgesMax = binomialCoefficients(numVert, 2);
+    //numEdgesMax = binomialCoefficients(numVert, 2);
+    numEdgesMax = numVert*(numVert-1)/2;
 
     switch (edgeDensity)
     {
@@ -121,17 +129,31 @@ void Menu::generateRandomGraph()
 
     cout<<numEdges<<" "<<numVert<<endl;
     cout<<endl;
-    int v1, v2, edge;
-    for (int i = 0; i < numEdges; i++)
+    int edge;
+    edgeOptionsTable = new EdgeOptions[numEdgesMax];
+    int i,j,k;
+    for (i = 0; i < numEdgesMax; i++)
     {
-      //  v1 = rand()
-       // cout<<
+
+        for (j = i+1; j < numVert; j++)
+        {
+            edgeOptionsTable[k].v1 = i;
+            edgeOptionsTable[k].v2 = j;
+            k++;
+        }
+    }
+    for (int i = 0; i < numEdgesMax; i++)
+    {
+
+        //edge = rand()%100+1;
+        cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<endl;
     }
 
 
+    delete[] edgeOptionsTable;
 
 }
-int Menu::binomialCoefficients(int n, int k) {
+/*int Menu::binomialCoefficients(int n, int k) {
    if (k == 0 || k == n) return 1;
    return (binomialCoefficients(n - 1, k - 1) + binomialCoefficients(n - 1, k));
-}
+}*/
