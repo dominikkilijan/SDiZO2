@@ -2,6 +2,7 @@
 #include<fstream>
 #include<math.h>
 #include<time.h>
+#include<bits/stdc++.h>
 
 #include "Menu.h"
 #include "ShortestPathMenu.h"
@@ -145,15 +146,33 @@ void Menu::generateRandomGraph()
     for (int i = 0; i < numEdgesMax; i++)
     {
 
+   for (int m = numEdges; m>0; m--)
+    {
+        //get swap index
+        int n = rand()%m;
+        //swap p[i] with p[j]
+        EdgeOptions temp;
+        temp = edgeOptionsTable[m];
+        edgeOptionsTable[m] = edgeOptionsTable[n];
+        edgeOptionsTable[n] = temp;
+    }
+
+
         //edge = rand()%100+1;
+
+    }
+    for (int i = 0; i < numEdgesMax; i++)
+    {
         cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<endl;
     }
 
 
-    delete[] edgeOptionsTable;
 
+
+    delete[] edgeOptionsTable;
 }
 /*int Menu::binomialCoefficients(int n, int k) {
    if (k == 0 || k == n) return 1;
    return (binomialCoefficients(n - 1, k - 1) + binomialCoefficients(n - 1, k));
 }*/
+

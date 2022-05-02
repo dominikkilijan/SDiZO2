@@ -17,6 +17,7 @@ class Menu
 
         void generateRandomGraph();
         int binomialCoefficients(int,int);
+        void shuffle_array(EdgeOptions,int);
 
 
     protected:
