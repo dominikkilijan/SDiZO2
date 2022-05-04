@@ -153,7 +153,7 @@ void Menu::generateRandomGraph()
     // pomieszanie kolejnosci
     for (int m = numEdgesMax-1; m>0; m--)
     {
-        int n = rand()%m;
+        int n = rand()%(m)+1;
         EdgeOptions temp;
         temp = edgeOptionsTable[m];
         edgeOptionsTable[m] = edgeOptionsTable[n];
@@ -162,16 +162,13 @@ void Menu::generateRandomGraph()
     // wypisywanie kolejnych krawedzi
     for (int i = 0; i < numEdges; i++)
     {
-        int edge = (rand()%100)+1;
+        int edge = (rand()%99)+1;
         cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
         fileWrite<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
     }
     fileWrite.close();
     }
     else cout<<"Nie udalo sie otworzyc pliku!\n";
-
-
-
 
     delete[] edgeOptionsTable;
 }

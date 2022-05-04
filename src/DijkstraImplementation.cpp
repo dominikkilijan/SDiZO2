@@ -31,10 +31,9 @@ void DijkstraImplementation::createGraphMatrix()
     int i,j;
     for (i = 0; i < numberOfVertices; i++)
     {
-        graphMatrix[i] = new int [numberOfEdges];
-        //graphMatrix[i] = new int [numberOfVertices];
-        for (j = 0; j < numberOfEdges; j++)
-        //for (j = 0; j < numberOfVertices; j++)
+
+        graphMatrix[i] = new int [numberOfVertices];
+        for (j = 0; j < numberOfVertices; j++)
         {
             graphMatrix[i][j] = 0;
         }
@@ -45,9 +44,11 @@ void DijkstraImplementation::printMatrix()
     int i,j;
     for (i = 0; i < numberOfVertices; i++)
     {
-        for (j = 0; j < numberOfEdges; j++)
+        for (j = 0; j < numberOfVertices; j++)
         {
-            cout<<graphMatrix[i][j]<<"  ";
+            if (graphMatrix[i][j] < 10) cout<<"  ";
+            else if (graphMatrix[i][j] > 10) cout<<" ";
+            cout<<graphMatrix[i][j];
         }
         cout<<endl;
     }
@@ -82,8 +83,8 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
             }
             else
             {
-                graphMatrix[i][k] = 1;
-                graphMatrix[j][k] = 2;
+                graphMatrix[i][j] = val;
+                graphMatrix[j][i] = val;
             }
 
         }
