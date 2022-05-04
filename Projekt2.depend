@@ -4,12 +4,12 @@
 	"Menu.h"
 	<bits/stdc++.h>
 
-1651655627 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1651655872 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
 
-1651430989 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+1651659328 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
 
 1651338334 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\bellmanfordimplementation.cpp
 	<iostream>
@@ -23,7 +23,7 @@
 
 1651167786 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\kruskalimplementation.h
 
-1651312087 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\mstmenu.cpp
+1651656419 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\mstmenu.cpp
 	<iostream>
 	"MSTMenu.h"
 	"Menu.h"
@@ -36,7 +36,7 @@
 
 1651167754 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primaimplementation.h
 
-1651312087 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
+1651656456 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
 	<iostream>
 	"ShortestPathMenu.h"
 	"Menu.h"

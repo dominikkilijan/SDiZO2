@@ -11,8 +11,10 @@ class DijkstraImplementation
         void createGraphMatrix();
         void printMatrix();
         void getFileInfo();
-        void dijkstraAlgorithmMatrix();
+        void dijkstraAlgorithmMatrix(int);
         void dijkstraAlgorithmList();
+        void printDistances();
+        void initTables();
 
     protected:
 
@@ -21,6 +23,9 @@ class DijkstraImplementation
         int numberOfEdges;
         int **graphMatrix;
         int whichFile;
+        int *distance;
+        bool *visited;
+        int dijkstraMatrixIterations;
 };
 
 #endif // DIJKSTRAIMPLEMENTATION_H

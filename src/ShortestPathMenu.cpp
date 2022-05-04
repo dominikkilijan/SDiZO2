@@ -11,7 +11,7 @@ ShortestPathMenu::ShortestPathMenu()
         while(work == 0) // ciagle wyswietlaj menu
         {
         int choice=0; // wybor struktury
-        cout << endl<<"MST MENU:"<<endl;
+        cout << endl<<"SHORTEST PATH MENU:"<<endl;
         cout << "------------------------------------------"<<endl;
         cout << "1. Algorytm Dijkstry "<<endl;
         cout << "2. Algorytm Bellmana-Forda "<<endl;
@@ -19,7 +19,7 @@ ShortestPathMenu::ShortestPathMenu()
         cout << "------------------------------------------"<<endl;
         cout << "Wybor: ";
         cin >> choice;
-        system("cls"); // czyszczenie konsoli
+        //system("cls"); // czyszczenie konsoli
 
         switch (choice)
         {

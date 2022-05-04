@@ -19,7 +19,7 @@ MSTMenu::MSTMenu()
         cout << "------------------------------------------"<<endl;
         cout << "Wybor: ";
         cin >> choice;
-        system("cls"); // czyszczenie konsoli
+        //system("cls"); // czyszczenie konsoli
 
         switch (choice)
         {

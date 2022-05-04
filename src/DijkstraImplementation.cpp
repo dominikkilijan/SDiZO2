@@ -13,6 +13,11 @@ DijkstraImplementation::DijkstraImplementation(int wF)
     getFileInfo();
     cout<<"Graf z pliku"<<endl;
     printMatrix();
+    initTables();
+    printDistances();
+    dijkstraAlgorithmMatrix(0);
+    printDistances();
+
 
 }
 
@@ -23,6 +28,8 @@ DijkstraImplementation::~DijkstraImplementation()
         delete[] graphMatrix[i];
     }
 
+    delete[] distance;
+    delete[] visited;
     delete[] graphMatrix;
 }
 
@@ -35,7 +42,9 @@ void DijkstraImplementation::createGraphMatrix()
         graphMatrix[i] = new int [numberOfVertices];
         for (j = 0; j < numberOfVertices; j++)
         {
-            graphMatrix[i][j] = 0;
+            if (i == j) graphMatrix[i][j] = 0;
+            else graphMatrix[i][j] = -1;
+            //graphMatrix[i][j] = -1;
         }
     }
 }
@@ -46,8 +55,8 @@ void DijkstraImplementation::printMatrix()
     {
         for (j = 0; j < numberOfVertices; j++)
         {
-            if (graphMatrix[i][j] < 10) cout<<"  ";
-            else if (graphMatrix[i][j] > 10) cout<<" ";
+            if (graphMatrix[i][j] < 10 && graphMatrix[i][j] >= 0) cout<<"  ";
+            else if (graphMatrix[i][j] > 10 || graphMatrix[i][j] == -1) cout<<" ";
             cout<<graphMatrix[i][j];
         }
         cout<<endl;
@@ -72,7 +81,6 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
 
         int i,j,k;
         for(k = 0; k < numberOfEdges; k++)
-        //while (!file.eof())
         {
             file >> i >> j >> val;
 
@@ -93,9 +101,62 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
     }
     else    cout << "File error - OPEN" << endl; // jesli nie znaleziono pliku o podanej nazwie
 }
-void DijkstraImplementation::dijkstraAlgorithmMatrix() // algorytm Dijkstry dla macierzy
+void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dijkstry dla macierzy
 {
+    visited[vertex] = true;
+    int changes = 0;
+    dijkstraMatrixIterations++;
 
+    for (int i=0; i<numberOfVertices; i++)
+    {
+        if ((visited[i]==false) && (graphMatrix[vertex][i]!=-1))
+        {
+            if (((distance[vertex]+graphMatrix[vertex][i])<distance[i]) || (distance[i] == -1))
+            {
+                distance[i] = distance[vertex] + graphMatrix[vertex][i];
+                changes++;
+            }
+        }
+    }
+    int smallestAvailableVertex = -1;
+    int distSmallestAV = -1;
+
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        if ((visited[i] == false) && (distance[i]>0) && ((distSmallestAV>distance[i]) || (distSmallestAV == -1)))
+        {
+            distSmallestAV = distance[i];
+            smallestAvailableVertex = i;
+            //changes++;
+        }
+    }
+    if (dijkstraMatrixIterations < numberOfVertices && changes != 0)
+    {
+        printDistances();
+        dijkstraAlgorithmMatrix(smallestAvailableVertex);
+    }
+    else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
+}
+void DijkstraImplementation::printDistances()
+{   cout<<"Odleglosci od wierzcholka 0:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<distance[i]<<" ";
+    }
+    cout<<endl;
+}
+void DijkstraImplementation::initTables()
+{
+    distance = new int[numberOfVertices];
+    visited = new bool[numberOfVertices];
+
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        distance[i] = -1;
+        visited[i] = false;
+    }
+    dijkstraMatrixIterations = 0;
+    distance[0] = 0;
 }
 void DijkstraImplementation::dijkstraAlgorithmList() // algorytm Dijkstry dla listy
 {
