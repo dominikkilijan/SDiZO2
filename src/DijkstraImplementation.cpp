@@ -1,6 +1,7 @@
 #include <iostream>
 #include "DijkstraImplementation.h"
 #include <fstream>
+#include <list>
 
 #define INF -1
 
@@ -8,21 +9,27 @@ using namespace std;
 
 fstream file;
 
+//==========================================================================================================================================
 DijkstraImplementation::DijkstraImplementation(int wF)
 {
-
+    // macierz
     whichFile = wF;
-    getFileInfo();
+    /*getFileInfo();
     cout<<"Graf z pliku"<<endl;
     printMatrix();
     initTables();
     printDistances();
     dijkstraAlgorithmMatrix(0);
-    printDistances();
+    printDistances();*/
+
+    // lista
+    getFileInfo();
+    //createGraphList();
+    printList();
 
 
 }
-
+//==========================================================================================================================================
 DijkstraImplementation::~DijkstraImplementation()
 {
     for (int i = 0; i < numberOfVertices; i++)
@@ -34,7 +41,7 @@ DijkstraImplementation::~DijkstraImplementation()
     delete[] visited;
     delete[] graphMatrix;
 }
-
+//==========================================================================================================================================
 void DijkstraImplementation::createGraphMatrix()
 {
     int i,j;
@@ -49,6 +56,7 @@ void DijkstraImplementation::createGraphMatrix()
         }
     }
 }
+
 void DijkstraImplementation::printMatrix()
 {
     int i,j;
@@ -64,22 +72,33 @@ void DijkstraImplementation::printMatrix()
     }
     cout<<endl;
 }
+//==========================================================================================================================================
 void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowej tablicy
 {
-    if (whichFile == 1) file.open("Graph1.txt", ios::in);
-    else if (whichFile == 2) file.open("GraphRandom.txt", ios::in);
+    //if (whichFile == 1) file.open("Graph1.txt", ios::in);
+    //else if (whichFile == 2) file.open("GraphRandom.txt", ios::in);
+
+    if (whichFile == 2) file.open("GraphRandom.txt", ios::in);
+    else file.open("Graph1.txt", ios::in);
 
     int val;
 
-
+    cout<<"Wybrano plik do wczytania"<<endl;
     if(file.is_open())
     {
     file >> numberOfEdges >> numberOfVertices;
     if(file.fail())  cout << "File error - READ SIZE" << endl; // jesli plik jest pusty
     else
     {
+        cout<<"Inicjalizacja macierzy i listy"<<endl;
         graphMatrix = new int *[numberOfVertices];
+        //vector<vector<ListElement>> graphList;
+        //graphList = new ListElement *[numberOfVertices];
+
         createGraphMatrix();
+        createGraphList();
+
+        cout<<"Po inicjalizacji listy"<<endl;
 
         int i,j,k;
         for(k = 0; k < numberOfEdges; k++)
@@ -95,14 +114,21 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
             {
                 graphMatrix[i][j] = val;
                 graphMatrix[j][i] = val;
-            }
 
+                cout<<"Wpisywanie wartosci do listy"<<endl;
+                //graphList[i][j].size();
+                graphList[i][graphList[i].size()].nextElement = j;
+                //graphList[i][m].edgeValue = val;
+                cout<<"Po iteracji wpisywania wartosci"<<endl;
+            }
+        cout<<"Koniec calego wpisywania"<<endl;
         }
     }
     file.close();
     }
     else    cout << "File error - OPEN" << endl; // jesli nie znaleziono pliku o podanej nazwie
 }
+//==========================================================================================================================================
 void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dijkstry dla macierzy
 {
     visited[vertex] = true;
@@ -159,7 +185,37 @@ void DijkstraImplementation::initTables()
     dijkstraMatrixIterations = 0;
     distance[0] = 0;
 }
+//==========================================================================================================================================
 void DijkstraImplementation::dijkstraAlgorithmList() // algorytm Dijkstry dla listy
 {
 
+}
+void DijkstraImplementation::addToListVector(int i, int j, int nextNode, int edge)
+{
+    //graphList[i][j].nextElement.push_back(nextNode);
+}
+void DijkstraImplementation::createGraphList()
+{
+    cout<<"Poczatek createGraphList"<<endl;
+    int i,j;
+    for (i = 0; i < numberOfVertices; i++)
+    {
+        vector<ListElement> graphList[i];
+    }
+    cout<<"Koniec createGraphList"<<endl;
+}
+void DijkstraImplementation::printList()
+{
+    cout<<"Poczatek printList"<<endl;
+    int i,j;
+    for (i = 0; i < numberOfVertices; i++)
+    {
+        cout<<i<<" -> ";
+        for (j = 0; j < graphList[i].size(); j++)
+        {
+            cout<<graphList[i][j].nextElement<<","<<graphList[i][j].edgeValue<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<"Koniec printList"<<endl;
 }

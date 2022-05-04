@@ -1,20 +1,36 @@
 #ifndef DIJKSTRAIMPLEMENTATION_H
 #define DIJKSTRAIMPLEMENTATION_H
 
+#include <list>
+#include <vector>
+
+using namespace std;
 
 class DijkstraImplementation
 {
     public:
+        struct ListElement
+        {
+            //int previousElement;
+            int nextElement;
+            int edgeValue;
+        };
+
         DijkstraImplementation(int);
         virtual ~DijkstraImplementation();
 
         void createGraphMatrix();
+        void createGraphList();
+
         void printMatrix();
+        void printList();
         void getFileInfo();
         void dijkstraAlgorithmMatrix(int);
         void dijkstraAlgorithmList();
         void printDistances();
         void initTables();
+        void addToListVector(int,int,int,int);
+
 
     protected:
 
@@ -26,6 +42,10 @@ class DijkstraImplementation
         int *distance;
         bool *visited;
         int dijkstraMatrixIterations;
+
+        vector<vector<ListElement>> graphList;
+
+
 };
 
 #endif // DIJKSTRAIMPLEMENTATION_H
