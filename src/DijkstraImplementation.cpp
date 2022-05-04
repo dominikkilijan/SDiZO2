@@ -2,6 +2,8 @@
 #include "DijkstraImplementation.h"
 #include <fstream>
 
+#define INF -1
+
 using namespace std;
 
 fstream file;
@@ -43,8 +45,7 @@ void DijkstraImplementation::createGraphMatrix()
         for (j = 0; j < numberOfVertices; j++)
         {
             if (i == j) graphMatrix[i][j] = 0;
-            else graphMatrix[i][j] = -1;
-            //graphMatrix[i][j] = -1;
+            else graphMatrix[i][j] = INF;
         }
     }
 }
@@ -56,11 +57,12 @@ void DijkstraImplementation::printMatrix()
         for (j = 0; j < numberOfVertices; j++)
         {
             if (graphMatrix[i][j] < 10 && graphMatrix[i][j] >= 0) cout<<"  ";
-            else if (graphMatrix[i][j] > 10 || graphMatrix[i][j] == -1) cout<<" ";
+            else if (graphMatrix[i][j] > 10 || graphMatrix[i][j] == INF) cout<<" ";
             cout<<graphMatrix[i][j];
         }
         cout<<endl;
     }
+    cout<<endl;
 }
 void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowej tablicy
 {
@@ -109,25 +111,24 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
 
     for (int i=0; i<numberOfVertices; i++)
     {
-        if ((visited[i]==false) && (graphMatrix[vertex][i]!=-1))
+        if ((visited[i]==false) && (graphMatrix[vertex][i]!=INF))
         {
-            if (((distance[vertex]+graphMatrix[vertex][i])<distance[i]) || (distance[i] == -1))
+            if (((distance[vertex]+graphMatrix[vertex][i])<distance[i]) || (distance[i] == INF))
             {
                 distance[i] = distance[vertex] + graphMatrix[vertex][i];
                 changes++;
             }
         }
     }
-    int smallestAvailableVertex = -1;
-    int distSmallestAV = -1;
+    int smallestAvailableVertex = INF;
+    int distSmallestAV = INF;
 
     for (int i = 0; i < numberOfVertices; i++)
     {
-        if ((visited[i] == false) && (distance[i]>0) && ((distSmallestAV>distance[i]) || (distSmallestAV == -1)))
+        if ((visited[i] == false) && (distance[i]>0) && ((distSmallestAV>distance[i]) || (distSmallestAV == INF)))
         {
             distSmallestAV = distance[i];
             smallestAvailableVertex = i;
-            //changes++;
         }
     }
     if (dijkstraMatrixIterations < numberOfVertices && changes != 0)
@@ -138,7 +139,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
     else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
 }
 void DijkstraImplementation::printDistances()
-{   cout<<"Odleglosci od wierzcholka 0:"<<endl;
+{   cout<<dijkstraMatrixIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<distance[i]<<" ";
@@ -152,7 +153,7 @@ void DijkstraImplementation::initTables()
 
     for (int i = 0; i < numberOfVertices; i++)
     {
-        distance[i] = -1;
+        distance[i] = INF;
         visited[i] = false;
     }
     dijkstraMatrixIterations = 0;

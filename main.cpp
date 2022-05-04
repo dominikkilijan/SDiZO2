@@ -12,6 +12,6 @@ int main()
 {
     Menu menu;
 
-    return 0;
+    system("pause");
 }
 

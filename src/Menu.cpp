@@ -126,6 +126,7 @@ void Menu::generateRandomGraph()
             break;
     default:
             cout<<"Nieprawidlowy numer polecenia!"<<endl;
+            exit(0);
     }
     fileWrite.open("GraphRandom.txt", ios::out);
     if (fileWrite.good())

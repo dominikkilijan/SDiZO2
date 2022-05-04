@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1651485488 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\main.cpp
+1651662373 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\main.cpp
 	<iostream>
 	"Menu.h"
 	<bits/stdc++.h>
 
-1651655872 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1651662150 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
