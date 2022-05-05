@@ -4,13 +4,15 @@
 	"Menu.h"
 	<bits/stdc++.h>
 
-1651702132 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1651750137 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
 	<list>
+	<algorithm>
+	<set>
 
-1651698539 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+1651749922 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
 	<list>
 	<vector>
 
@@ -58,4 +60,9 @@
 	"DijkstraImplementation.h"
 
 1651529225 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\menu.h
+
+1651746455 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\listelement.cpp
+	"ListElement.h"
+
+1651746180 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\listelement.h
 

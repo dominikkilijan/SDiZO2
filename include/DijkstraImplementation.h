@@ -6,12 +6,12 @@
 
 using namespace std;
 
+
 class DijkstraImplementation
 {
     public:
         struct ListElement
         {
-            //int previousElement;
             int nextElement;
             int edgeValue;
         };
@@ -29,7 +29,7 @@ class DijkstraImplementation
         void dijkstraAlgorithmList();
         void printDistances();
         void initTables();
-        void addToListVector(int,int,int,int);
+        void addToListVector(int,int,int);
 
 
     protected:
@@ -43,7 +43,7 @@ class DijkstraImplementation
         bool *visited;
         int dijkstraMatrixIterations;
 
-        vector<vector<ListElement>> graphList;
+        list<ListElement> *graphList;
 
 
 };

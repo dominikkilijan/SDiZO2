@@ -3,6 +3,9 @@
 #include <fstream>
 #include <list>
 
+#include <algorithm>
+#include <set>
+
 #define INF -1
 
 using namespace std;
@@ -24,7 +27,6 @@ DijkstraImplementation::DijkstraImplementation(int wF)
 
     // lista
     getFileInfo();
-    //createGraphList();
     printList();
 
 
@@ -92,11 +94,11 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
     {
         cout<<"Inicjalizacja macierzy i listy"<<endl;
         graphMatrix = new int *[numberOfVertices];
-        //vector<vector<ListElement>> graphList;
-        //graphList = new ListElement *[numberOfVertices];
+        //vector<list<ListElement>> graphList[numberOfVertices];
+        graphList = new list<ListElement>[numberOfVertices];
 
         createGraphMatrix();
-        createGraphList();
+        //createGraphList();
 
         cout<<"Po inicjalizacji listy"<<endl;
 
@@ -116,9 +118,9 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
                 graphMatrix[j][i] = val;
 
                 cout<<"Wpisywanie wartosci do listy"<<endl;
-                //graphList[i][j].size();
-                graphList[i][graphList[i].size()].nextElement = j;
-                //graphList[i][m].edgeValue = val;
+
+                addToListVector(i,j,val);
+                addToListVector(j,i,val);
                 cout<<"Po iteracji wpisywania wartosci"<<endl;
             }
         cout<<"Koniec calego wpisywania"<<endl;
@@ -190,14 +192,17 @@ void DijkstraImplementation::dijkstraAlgorithmList() // algorytm Dijkstry dla li
 {
 
 }
-void DijkstraImplementation::addToListVector(int i, int j, int nextNode, int edge)
+void DijkstraImplementation::addToListVector(int source, int nextE, int edgeV)
 {
-    //graphList[i][j].nextElement.push_back(nextNode);
+    ListElement listElement;
+    listElement.nextElement = nextE;
+    listElement.edgeValue = edgeV;
+    graphList[source].push_back(listElement);
 }
 void DijkstraImplementation::createGraphList()
 {
     cout<<"Poczatek createGraphList"<<endl;
-    int i,j;
+    int i;
     for (i = 0; i < numberOfVertices; i++)
     {
         vector<ListElement> graphList[i];
@@ -207,13 +212,13 @@ void DijkstraImplementation::createGraphList()
 void DijkstraImplementation::printList()
 {
     cout<<"Poczatek printList"<<endl;
-    int i,j;
+    int i;
     for (i = 0; i < numberOfVertices; i++)
     {
         cout<<i<<" -> ";
-        for (j = 0; j < graphList[i].size(); j++)
+        for (const auto& iterate : graphList[i])
         {
-            cout<<graphList[i][j].nextElement<<","<<graphList[i][j].edgeValue<<" ";
+            cout<<iterate.nextElement<<","<<iterate.edgeValue<<" ";
         }
         cout<<endl;
     }
