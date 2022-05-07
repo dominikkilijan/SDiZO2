@@ -29,6 +29,8 @@ class DijkstraImplementation
         void dijkstraAlgorithmList(int);
         void printDistances();
         void printDistancesList();
+        void printVisited();
+        void printVisitedList();
         void initTables();
         void addToListVector(int,int,int);
         //int

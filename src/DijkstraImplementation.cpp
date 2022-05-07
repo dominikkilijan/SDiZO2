@@ -24,13 +24,16 @@ DijkstraImplementation::DijkstraImplementation(int wF)
     printDistances();
     dijkstraAlgorithmMatrix(0);
     printDistances();
+    printVisited();
     cout<<"===================================================================================================================="<<endl;
     // lista
     getFileInfo();
     printList();
     initTables();
+    printDistancesList();
     dijkstraAlgorithmList(0);
     printDistancesList();
+    printVisitedList();
 
 }
 //==========================================================================================================================================
@@ -89,6 +92,15 @@ void DijkstraImplementation::printDistances()
     }
     cout<<endl;
 }
+void DijkstraImplementation::printVisited()
+{
+    cout<<dijkstraMatrixIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<visited[i]<<" ";
+    }
+    cout<<endl;
+}
 void DijkstraImplementation::initTables()
 {
     distance = new int[numberOfVertices];
@@ -129,6 +141,7 @@ void DijkstraImplementation::printList()
         }
         cout<<endl;
     }
+    cout<<endl;
 }
 void DijkstraImplementation::printDistancesList()
 {   cout<<dijkstraListIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
@@ -137,6 +150,9 @@ void DijkstraImplementation::printDistancesList()
         cout<<distanceList[i]<<" ";
     }
     cout<<endl;
+}
+void DijkstraImplementation::printVisitedList()
+{
     cout<<dijkstraListIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
@@ -191,17 +207,12 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
     }
     else    cout << "File error - OPEN" << endl; // jesli nie znaleziono pliku o podanej nazwie
 }
-
-/*int DijkstraImplementation::sortList(int i)
-{
-        graphList[i].sort([](const ListElement &f, const ListElement &s) { return f.nextElement < s.nextElement; });
-}*/
 //==========================================================================================================================================
 void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dijkstry dla macierzy
 {
 
     visited[vertex] = true;
-    //int changes = 0;
+    int changes = 0;
     dijkstraMatrixIterations++;
 
     for (int i=0; i<numberOfVertices; i++)
@@ -212,7 +223,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
             if (distance[i] == INF || ((distance[vertex]+graphMatrix[vertex][i])<distance[i]))
             {
                 distance[i] = distance[vertex] + graphMatrix[vertex][i];
-                //changes++;
+                changes++;
             }
         }
     }
@@ -227,10 +238,9 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
             smallestAvailableVertex = i;
         }
     }
-    if (dijkstraMatrixIterations < numberOfVertices /*&& changes != 0*/)
+    if (dijkstraMatrixIterations < numberOfVertices && changes != 0)
     {
         printDistances();
-        cout<<"Wykonujemy kolejna petle dla i = "<<smallestAvailableVertex<<endl;
         dijkstraAlgorithmMatrix(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
@@ -239,62 +249,42 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
 void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijkstry dla listy
 {
     visitedList[vertex] = true;
-    //int changes = 0;
-    //printDistancesList();
-    printList();
+    int changes = 0;
     dijkstraListIterations++;
-    //set<int> nextVertexSet;
     vector<int> nextVertexSet;
-    cout<<"Deklaracja iteratora"<<endl;
+    // Deklaracja iteratora
     list<ListElement>::iterator ite;
     for (ite = graphList[vertex].begin(); ite != graphList[vertex].end(); ite++)
     {
-        //nextVertexSet.insert(ite->nextElement);
         nextVertexSet.push_back(ite->nextElement);
-        cout<<ite->nextElement<<endl;
     }
-    for (auto it = nextVertexSet.begin(); it != nextVertexSet.end(); ++it)
-        cout << ' ' << *it;
-    cout<<endl;
 
-    ite = graphList[vertex].begin(); //3,3      5,1     1,1
     for (int i=0; i<numberOfVertices; i++)
     {
-        //cout<<"Sprawdzenie czy wierzcholek byl odwiedzony i sprawdzenie czy jest polaczony z wierzcholkiem \"vertex\""<<endl;
-        //const bool isIn = nextVertexSet.find(i) != nextVertexSet.end();
+        // Sprawdzenie czy wierzcholek byl odwiedzony i sprawdzenie czy jest polaczony z wierzcholkiem "vertex\"
         bool isIn;
         if (find(nextVertexSet.begin(), nextVertexSet.end(), i) != nextVertexSet.end()) isIn = true;
         else isIn = false;
-        //cout<<"isIn = "<<isIn<<endl;
+
         if (isIn)
         {
             if ((visitedList[i]==false))
             {
-                cout<<"i = "<<i<<endl;
-                cout<<"ite->nextElement = "<<ite->nextElement<<"\nite->edgeValue = "<<ite->edgeValue<<endl;
                 ite = graphList[vertex].begin();
                 while (ite->nextElement != i)
                 {
                     ite++;
                 }
-                /*else
-                {
-                    ite = graphList[vertex].begin();
-                    if (ite->nextElement != i) ite++;
-                }*/
 
                 if (((distanceList[vertex]+(ite->edgeValue))<distanceList[i]) || (distanceList[i] == INF))
-                //if ( (distanceList[i] == INF) || ((distanceList[vertex]+(ite->edgeValue))<distanceList[i]))
                 {
-
                     distanceList[i] = distanceList[vertex] + ite->edgeValue;
-                    //changes++;
+                    changes++;
                 }
             }
-            ite++;
         }
     }
-    //cout<<"Wyznaczenie kolejnego wierzcholka do dijkstry"<<endl;
+    // Wyznaczenie kolejnego wierzcholka w algorytmie
     int smallestAvailableVertex = INF;
     int distSmallestAV = INF;
 
@@ -306,11 +296,10 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
             smallestAvailableVertex = i;
         }
     }
-    if (dijkstraListIterations < numberOfVertices /*&& changes != 0*/)
+    if (dijkstraListIterations < numberOfVertices && changes != 0)
     {
         printDistancesList();
         nextVertexSet.clear();
-        cout<<"Wykonujemy kolejna petle dla smallestAvailableVertex = "<<smallestAvailableVertex<<endl;
         dijkstraAlgorithmList(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Dijkstry dla listy\n";

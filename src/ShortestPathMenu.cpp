@@ -33,7 +33,6 @@ ShortestPathMenu::ShortestPathMenu()
         case 2:
             {
             cout<<"Algorytm Bellmana-Forda"<<endl;
-            system("cls"); // czyszczenie konsoli
             //delete this;
             }
             break;
