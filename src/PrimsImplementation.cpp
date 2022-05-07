@@ -1,17 +1,19 @@
 #include <iostream>
-#include "DijkstraImplementation.h"
+#include "PrimsImplementation.h"
 #include <fstream>
 #include <list>
 #include <algorithm>
+
+#include "ListElement.h"
 
 #define INF -1
 
 using namespace std;
 
-fstream file;
+fstream primsFile;
 
 //==========================================================================================================================================
-DijkstraImplementation::DijkstraImplementation(int wF)
+PrimsImplementation::PrimsImplementation(int wF)
 {
     // macierz
     whichFile = wF;
@@ -20,27 +22,27 @@ DijkstraImplementation::DijkstraImplementation(int wF)
     printMatrix();
     initTables();
     printDistances();
-    dijkstraAlgorithmMatrix(0);
+    primsAlgorithmMatrix(0);
     printDistances();
     printVisited();
-    cout<<"======================================================================================================================"<<endl;
+    cout<<"===================================================================================================================="<<endl;
     // lista
     getFileInfo();
     printList();
     initTables();
     printDistancesList();
-    dijkstraAlgorithmList(0);
+    primsAlgorithmList(0);
     printDistancesList();
     printVisitedList();
 
 }
 //==========================================================================================================================================
-DijkstraImplementation::~DijkstraImplementation()
+PrimsImplementation::~PrimsImplementation()
 {
     for (int i = 0; i < numberOfVertices; i++)
     {
         delete[] graphMatrix[i];
-        graphList[i].clear();
+        primsGraphList[i].clear();
     }
 
     delete[] distance;
@@ -48,10 +50,10 @@ DijkstraImplementation::~DijkstraImplementation()
     delete[] visited;
     delete[] visitedList;
     delete[] graphMatrix;
-    delete[] graphList;
+    delete[] primsGraphList;
 }
 //==========================================================================================================================================
-void DijkstraImplementation::createGraphMatrix()
+void PrimsImplementation::createGraphMatrix()
 {
     int i,j;
     for (i = 0; i < numberOfVertices; i++)
@@ -66,7 +68,7 @@ void DijkstraImplementation::createGraphMatrix()
     }
 }
 
-void DijkstraImplementation::printMatrix()
+void PrimsImplementation::printMatrix()
 {
     int i,j;
     for (i = 0; i < numberOfVertices; i++)
@@ -82,24 +84,24 @@ void DijkstraImplementation::printMatrix()
     cout<<endl;
 }
 
-void DijkstraImplementation::printDistances()
-{   cout<<dijkstraMatrixIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
+void PrimsImplementation::printDistances()
+{   cout<<primsMatrixIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<distance[i]<<" ";
     }
     cout<<endl;
 }
-void DijkstraImplementation::printVisited()
+void PrimsImplementation::printVisited()
 {
-    cout<<dijkstraMatrixIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
+    cout<<primsMatrixIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<visited[i]<<" ";
     }
     cout<<endl;
 }
-void DijkstraImplementation::initTables()
+void PrimsImplementation::initTables()
 {
     distance = new int[numberOfVertices];
     distanceList = new int[numberOfVertices];
@@ -113,27 +115,27 @@ void DijkstraImplementation::initTables()
         visited[i] = false;
         visitedList[i] = false;
     }
-    dijkstraMatrixIterations = 0;
-    dijkstraListIterations = 0;
+    primsMatrixIterations = 0;
+    primsListIterations = 0;
     distance[0] = 0;
     distanceList[0] = 0;
 }
 //==========================================================================================================================================
-void DijkstraImplementation::addToListVector(int source, int nextE, int edgeV)
+void PrimsImplementation::addToListVector(int source, int nextE, int edgeV)
 {
     ListElement listElement;
     listElement.nextElement = nextE;
     listElement.edgeValue = edgeV;
-    graphList[source].push_back(listElement);
+    primsGraphList[source].push_back(listElement);
 }
 
-void DijkstraImplementation::printList()
+void PrimsImplementation::printList()
 {
     int i;
     for (i = 0; i < numberOfVertices; i++)
     {
         cout<<i<<" -> ";
-        for (const auto& iterate : graphList[i])
+        for (const auto& iterate : primsGraphList[i])
         {
             cout<<"("<<iterate.nextElement<<","<<iterate.edgeValue<<")"<<" ";
         }
@@ -141,17 +143,17 @@ void DijkstraImplementation::printList()
     }
     cout<<endl;
 }
-void DijkstraImplementation::printDistancesList()
-{   cout<<dijkstraListIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
+void PrimsImplementation::printDistancesList()
+{   cout<<primsListIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<distanceList[i]<<" ";
     }
     cout<<endl;
 }
-void DijkstraImplementation::printVisitedList()
+void PrimsImplementation::printVisitedList()
 {
-    cout<<dijkstraListIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
+    cout<<primsListIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<visitedList[i]<<" ";
@@ -159,33 +161,33 @@ void DijkstraImplementation::printVisitedList()
     cout<<endl;
 }
 //==========================================================================================================================================
-void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowej tablicy
+void PrimsImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowej tablicy
 {
 
-    if (whichFile == 2) file.open("GraphRandom.txt", ios::in);
-    else file.open("Graph1.txt", ios::in);
+    if (whichFile == 2) primsFile.open("GraphRandom.txt", ios::in);
+    else primsFile.open("Graph1.txt", ios::in);
 
     int val;
 
     cout<<"Wybrano plik do wczytania"<<endl;
-    if(file.is_open())
+    if(primsFile.is_open())
     {
-    file >> numberOfEdges >> numberOfVertices;
-    if(file.fail())  cout << "File error - READ SIZE" << endl; // jesli plik jest pusty
+    primsFile >> numberOfEdges >> numberOfVertices;
+    if(primsFile.fail())  cout << "File error - READ SIZE" << endl; // jesli plik jest pusty
     else
     {
         // Inicjalizacja macierzy i listy
         graphMatrix = new int *[numberOfVertices];
-        graphList = new list<ListElement>[numberOfVertices];
+        primsGraphList = new list<ListElement>[numberOfVertices];
 
         createGraphMatrix();
 
         int i,j,k;
         for(k = 0; k < numberOfEdges; k++)
         {
-            file >> i >> j >> val;
+            primsFile >> i >> j >> val;
 
-            if(file.fail())
+            if(primsFile.fail())
             {
                 cout << "File error - READ DATA" << endl; // jesli w pliku jest tylko rozmiar>0
                 break;
@@ -201,17 +203,16 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
             }
         }
     }
-    file.close();
+    primsFile.close();
     }
     else    cout << "File error - OPEN" << endl; // jesli nie znaleziono pliku o podanej nazwie
 }
 //==========================================================================================================================================
-void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dijkstry dla macierzy
+void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla macierzy
 {
-
     visited[vertex] = true;
     int changes = 0;
-    dijkstraMatrixIterations++;
+    primsMatrixIterations++;
 
     for (int i=0; i<numberOfVertices; i++)
     {
@@ -236,23 +237,23 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
             smallestAvailableVertex = i;
         }
     }
-    if (dijkstraMatrixIterations < numberOfVertices && changes != 0)
+    if (primsMatrixIterations < numberOfVertices && changes != 0)
     {
         printDistances();
-        dijkstraAlgorithmMatrix(smallestAvailableVertex);
+        primsAlgorithmMatrix(smallestAvailableVertex);
     }
-    else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
+    else cout<<"\nKoniec algorytmu Primy dla macierzy\n";
 }
 //------------------------------------------------------------------------------------------------------------------------------------------
-void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijkstry dla listy
+void PrimsImplementation::primsAlgorithmList(int vertex) // algorytm Primy dla listy
 {
     visitedList[vertex] = true;
     int changes = 0;
-    dijkstraListIterations++;
+    primsListIterations++;
     vector<int> nextVertexSet;
     // Deklaracja iteratora
     list<ListElement>::iterator ite;
-    for (ite = graphList[vertex].begin(); ite != graphList[vertex].end(); ite++)
+    for (ite = primsGraphList[vertex].begin(); ite != primsGraphList[vertex].end(); ite++)
     {
         nextVertexSet.push_back(ite->nextElement);
     }
@@ -268,7 +269,7 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
         {
             if ((visitedList[i]==false))
             {
-                ite = graphList[vertex].begin();
+                ite = primsGraphList[vertex].begin();
                 while (ite->nextElement != i)
                 {
                     ite++;
@@ -294,11 +295,11 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
             smallestAvailableVertex = i;
         }
     }
-    if (dijkstraListIterations < numberOfVertices && changes != 0)
+    if (primsListIterations < numberOfVertices && changes != 0)
     {
         printDistancesList();
         nextVertexSet.clear();
-        dijkstraAlgorithmList(smallestAvailableVertex);
+        primsAlgorithmList(smallestAvailableVertex);
     }
-    else cout<<"\nKoniec algorytmu Dijkstry dla listy\n";
+    else cout<<"\nKoniec algorytmu Primy dla listy\n";
 }

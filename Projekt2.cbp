@@ -39,7 +39,7 @@
 		<Unit filename="include/KruskalImplementation.h" />
 		<Unit filename="include/MSTMenu.h" />
 		<Unit filename="include/Menu.h" />
-		<Unit filename="include/PrimaImplementation.h" />
+		<Unit filename="include/PrimsImplementation.h" />
 		<Unit filename="include/ShortestPathMenu.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BellmanFordImplementation.cpp" />
@@ -47,7 +47,7 @@
 		<Unit filename="src/KruskalImplementation.cpp" />
 		<Unit filename="src/MSTMenu.cpp" />
 		<Unit filename="src/Menu.cpp" />
-		<Unit filename="src/PrimaImplementation.cpp" />
+		<Unit filename="src/PrimsImplementation.cpp" />
 		<Unit filename="src/ShortestPathMenu.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

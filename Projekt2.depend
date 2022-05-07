@@ -4,18 +4,17 @@
 	"Menu.h"
 	<bits/stdc++.h>
 
-1651943165 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1651964892 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
 	<list>
 	<algorithm>
-	<set>
-	<unordered_set>
 
-1651943032 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+1651965451 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
 	<list>
 	<vector>
+	"ListElement.h"
 
 1651338334 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\bellmanfordimplementation.cpp
 	<iostream>
@@ -49,7 +48,7 @@
 
 1651311685 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\shortestpathmenu.h
 
-1651662413 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\menu.cpp
+1651965000 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\menu.cpp
 	<iostream>
 	<fstream>
 	<math.h>
@@ -59,11 +58,25 @@
 	"ShortestPathMenu.h"
 	"MSTMenu.h"
 	"DijkstraImplementation.h"
+	"PrimsImplementation.h"
 
 1651529225 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\menu.h
 
-1651746455 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\listelement.cpp
+1651964444 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\listelement.cpp
 	"ListElement.h"
 
-1651746180 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\listelement.h
+1651964531 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\listelement.h
+
+1651965451 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
+	<iostream>
+	"PrimsImplementation.h"
+	<fstream>
+	<list>
+	<algorithm>
+	"ListElement.h"
+
+1651965246 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
+	<list>
+	<vector>
+	"ListElement.h"
 

@@ -1,5 +1,5 @@
-#ifndef DIJKSTRAIMPLEMENTATION_H
-#define DIJKSTRAIMPLEMENTATION_H
+#ifndef PRIMSIMPLEMENTATION_H
+#define PRIMSIMPLEMENTATION_H
 
 #include <list>
 #include <vector>
@@ -7,13 +7,12 @@
 
 using namespace std;
 
-
-class DijkstraImplementation
+class PrimsImplementation
 {
     public:
 
-        DijkstraImplementation(int);
-        virtual ~DijkstraImplementation();
+        PrimsImplementation(int);
+        virtual ~PrimsImplementation();
 
         void createGraphMatrix();
         void createGraphList();
@@ -21,15 +20,14 @@ class DijkstraImplementation
         void printMatrix();
         void printList();
         void getFileInfo();
-        void dijkstraAlgorithmMatrix(int);
-        void dijkstraAlgorithmList(int);
+        void primsAlgorithmMatrix(int);
+        void primsAlgorithmList(int);
         void printDistances();
         void printDistancesList();
         void printVisited();
         void printVisitedList();
         void initTables();
         void addToListVector(int,int,int);
-        //int
 
     protected:
 
@@ -42,12 +40,10 @@ class DijkstraImplementation
         int *distanceList;
         bool *visited;
         bool *visitedList;
-        int dijkstraMatrixIterations;
-        int dijkstraListIterations;
+        int primsMatrixIterations;
+        int primsListIterations;
 
-        list<ListElement> *graphList;
-
-
+        list<ListElement> *primsGraphList;
 };
 
-#endif // DIJKSTRAIMPLEMENTATION_H
+#endif // PRIMSIMPLEMENTATION_H

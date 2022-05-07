@@ -8,6 +8,7 @@
 #include "ShortestPathMenu.h"
 #include "MSTMenu.h"
 #include "DijkstraImplementation.h"
+#include "PrimsImplementation.h"
 
 
 using namespace std;
@@ -73,6 +74,7 @@ Menu::Menu()
 
         case 2:
             {
+            PrimsImplementation prim(fileChoice);
             MSTMenu mstMenu;
             delete this;
             }
