@@ -31,7 +31,7 @@ class DijkstraImplementation
         void printDistancesList();
         void initTables();
         void addToListVector(int,int,int);
-
+        //int
 
     protected:
 
