@@ -2,7 +2,6 @@
 #include "DijkstraImplementation.h"
 #include <fstream>
 #include <list>
-
 #include <algorithm>
 #include <set>
 
@@ -17,18 +16,20 @@ DijkstraImplementation::DijkstraImplementation(int wF)
 {
     // macierz
     whichFile = wF;
-    /*getFileInfo();
+    getFileInfo();
     cout<<"Graf z pliku"<<endl;
     printMatrix();
     initTables();
     printDistances();
     dijkstraAlgorithmMatrix(0);
-    printDistances();*/
+    printDistances();
 
     // lista
-    getFileInfo();
+    /*getFileInfo();
     printList();
-
+    initTables();
+    dijkstraAlgorithmList(0);
+    printDistancesList();*/
 
 }
 //==========================================================================================================================================
@@ -37,11 +38,13 @@ DijkstraImplementation::~DijkstraImplementation()
     for (int i = 0; i < numberOfVertices; i++)
     {
         delete[] graphMatrix[i];
+        graphList[i].clear();
     }
 
     delete[] distance;
     delete[] visited;
     delete[] graphMatrix;
+    delete[] graphList;
 }
 //==========================================================================================================================================
 void DijkstraImplementation::createGraphMatrix()
@@ -74,11 +77,67 @@ void DijkstraImplementation::printMatrix()
     }
     cout<<endl;
 }
+
+void DijkstraImplementation::printDistances()
+{   cout<<dijkstraMatrixIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<distance[i]<<" ";
+    }
+    cout<<endl;
+}
+void DijkstraImplementation::initTables()
+{
+    distance = new int[numberOfVertices];
+    distanceList = new int[numberOfVertices];
+    visited = new bool[numberOfVertices];
+    visitedList = new bool[numberOfVertices];
+
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        distance[i] = INF;
+        distanceList[i] = INF;
+        visitedList[i] = false;
+    }
+    dijkstraMatrixIterations = 0;
+    dijkstraListIterations = 0;
+    distance[0] = 0;
+    distanceList[0] = 0;
+}
+//==========================================================================================================================================
+
+void DijkstraImplementation::addToListVector(int source, int nextE, int edgeV)
+{
+    ListElement listElement;
+    listElement.nextElement = nextE;
+    listElement.edgeValue = edgeV;
+    graphList[source].push_back(listElement);
+}
+
+void DijkstraImplementation::printList()
+{
+    int i;
+    for (i = 0; i < numberOfVertices; i++)
+    {
+        cout<<i<<" -> ";
+        for (const auto& iterate : graphList[i])
+        {
+            cout<<"("<<iterate.nextElement<<","<<iterate.edgeValue<<")"<<" ";
+        }
+        cout<<endl;
+    }
+}
+void DijkstraImplementation::printDistancesList()
+{   cout<<dijkstraListIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<distanceList[i]<<" ";
+    }
+    cout<<endl;
+}
 //==========================================================================================================================================
 void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowej tablicy
 {
-    //if (whichFile == 1) file.open("Graph1.txt", ios::in);
-    //else if (whichFile == 2) file.open("GraphRandom.txt", ios::in);
 
     if (whichFile == 2) file.open("GraphRandom.txt", ios::in);
     else file.open("Graph1.txt", ios::in);
@@ -92,15 +151,11 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
     if(file.fail())  cout << "File error - READ SIZE" << endl; // jesli plik jest pusty
     else
     {
-        cout<<"Inicjalizacja macierzy i listy"<<endl;
+        // Inicjalizacja macierzy i listy
         graphMatrix = new int *[numberOfVertices];
-        //vector<list<ListElement>> graphList[numberOfVertices];
         graphList = new list<ListElement>[numberOfVertices];
 
         createGraphMatrix();
-        //createGraphList();
-
-        cout<<"Po inicjalizacji listy"<<endl;
 
         int i,j,k;
         for(k = 0; k < numberOfEdges; k++)
@@ -114,25 +169,25 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
             }
             else
             {
+                // macierz
                 graphMatrix[i][j] = val;
                 graphMatrix[j][i] = val;
-
-                cout<<"Wpisywanie wartosci do listy"<<endl;
-
+                // lista
                 addToListVector(i,j,val);
                 addToListVector(j,i,val);
-                cout<<"Po iteracji wpisywania wartosci"<<endl;
             }
-        cout<<"Koniec calego wpisywania"<<endl;
         }
     }
     file.close();
     }
     else    cout << "File error - OPEN" << endl; // jesli nie znaleziono pliku o podanej nazwie
 }
+
+
 //==========================================================================================================================================
 void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dijkstry dla macierzy
 {
+
     visited[vertex] = true;
     int changes = 0;
     dijkstraMatrixIterations++;
@@ -141,7 +196,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
     {
         if ((visited[i]==false) && (graphMatrix[vertex][i]!=INF))
         {
-            if (((distance[vertex]+graphMatrix[vertex][i])<distance[i]) || (distance[i] == INF))
+            if (distance[i] == INF || ((distance[vertex]+graphMatrix[vertex][i])<distance[i]))
             {
                 distance[i] = distance[vertex] + graphMatrix[vertex][i];
                 changes++;
@@ -162,65 +217,67 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
     if (dijkstraMatrixIterations < numberOfVertices && changes != 0)
     {
         printDistances();
+        cout<<"Wykonujemy kolejna petle dla i = "<<smallestAvailableVertex<<endl;
         dijkstraAlgorithmMatrix(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
 }
-void DijkstraImplementation::printDistances()
-{   cout<<dijkstraMatrixIterations+1<<". "<<"Odleglosci od wierzcholka 0:"<<endl;
-    for (int i = 0; i < numberOfVertices; i++)
+//------------------------------------------------------------------------------------------------------------------------------------------
+void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijkstry dla listy
+{
+    cout<<"Iteracja algorytmu dijkstry"<<endl;
+    visitedList[vertex] = true;
+    int changes = 0;
+    dijkstraListIterations++;
+    //printDistancesList();
+    set<int> nextVertexSet;
+    cout<<"Deklaracja iteratora"<<endl;
+    list<ListElement>::iterator ite;
+    for (ite = graphList[vertex].begin(); ite != graphList[vertex].end(); ite++)
     {
-        cout<<distance[i]<<" ";
+        nextVertexSet.insert(ite->nextElement);
+        cout<<ite->nextElement<<endl;
     }
-    cout<<endl;
-}
-void DijkstraImplementation::initTables()
-{
-    distance = new int[numberOfVertices];
-    visited = new bool[numberOfVertices];
-
-    for (int i = 0; i < numberOfVertices; i++)
+    ite = graphList[vertex].begin();
+    cout<<"Wykonywanie numberOfVertices razy"<<endl;
+    //for (int i=0; i<graphList[vertex].size(); i++)
+    for (int i=0; i<numberOfVertices; i++)
+    //for(it = g.graphList[i].begin(); it != g.adjList[u].end();it++)
     {
-        distance[i] = INF;
-        visited[i] = false;
-    }
-    dijkstraMatrixIterations = 0;
-    distance[0] = 0;
-}
-//==========================================================================================================================================
-void DijkstraImplementation::dijkstraAlgorithmList() // algorytm Dijkstry dla listy
-{
-
-}
-void DijkstraImplementation::addToListVector(int source, int nextE, int edgeV)
-{
-    ListElement listElement;
-    listElement.nextElement = nextE;
-    listElement.edgeValue = edgeV;
-    graphList[source].push_back(listElement);
-}
-void DijkstraImplementation::createGraphList()
-{
-    cout<<"Poczatek createGraphList"<<endl;
-    int i;
-    for (i = 0; i < numberOfVertices; i++)
-    {
-        vector<ListElement> graphList[i];
-    }
-    cout<<"Koniec createGraphList"<<endl;
-}
-void DijkstraImplementation::printList()
-{
-    cout<<"Poczatek printList"<<endl;
-    int i;
-    for (i = 0; i < numberOfVertices; i++)
-    {
-        cout<<i<<" -> ";
-        for (const auto& iterate : graphList[i])
+        cout<<"Sprawdzenie czy wierzcholek byl odwiedzony"<<endl;  // cout<<"I sprawdzenie czy jest polaczony z wierzcholkiem \"vertex\""<<endl;
+        const bool is_in = nextVertexSet.find(i) != nextVertexSet.end();
+        if ((visitedList[i]==false) && is_in)
         {
-            cout<<iterate.nextElement<<","<<iterate.edgeValue<<" ";
+            cout<<"Wierzcholek nie byl odwiedzony wiec sprawdzamy czy mozna relaksowac"<<endl;
+            if (((distanceList[vertex]+(ite->edgeValue))<distance[i]) || (distance[i] == INF))
+            //for(it = g.graphList[i].begin(); it != g.adjList[u].end();it++)
+            {
+                cout<<"Relaksacja"<<endl;
+                distanceList[i] = distanceList[vertex] + ite->edgeValue;
+                changes++;
+                ite++;
+            }
+
         }
-        cout<<endl;
+
     }
-    cout<<"Koniec printList"<<endl;
+    cout<<"Wyznaczenie kolejnego wierzcholka do dijkstry"<<endl;
+    int smallestAvailableVertex = INF;
+    int distSmallestAV = INF;
+
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        if ((visitedList[i] == false) && (distanceList[i]>0) && ((distSmallestAV == INF) || (distSmallestAV>distance[i]) ))
+        {
+            distSmallestAV = distanceList[i];
+            smallestAvailableVertex = i;
+        }
+    }
+    if (dijkstraListIterations < numberOfVertices && changes != 0)
+    {
+        printDistancesList();
+        cout<<"Wykonujemy kolejna petle dla i = "<<smallestAvailableVertex<<endl;
+        dijkstraAlgorithmList(smallestAvailableVertex);
+    }
+    else cout<<"\nKoniec algorytmu Dijkstry dla listy\n";
 }

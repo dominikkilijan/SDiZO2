@@ -26,8 +26,9 @@ class DijkstraImplementation
         void printList();
         void getFileInfo();
         void dijkstraAlgorithmMatrix(int);
-        void dijkstraAlgorithmList();
+        void dijkstraAlgorithmList(int);
         void printDistances();
+        void printDistancesList();
         void initTables();
         void addToListVector(int,int,int);
 
@@ -40,8 +41,11 @@ class DijkstraImplementation
         int **graphMatrix;
         int whichFile;
         int *distance;
+        int *distanceList;
         bool *visited;
+        bool *visitedList;
         int dijkstraMatrixIterations;
+        int dijkstraListIterations;
 
         list<ListElement> *graphList;
 
