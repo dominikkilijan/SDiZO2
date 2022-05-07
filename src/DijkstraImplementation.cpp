@@ -42,7 +42,9 @@ DijkstraImplementation::~DijkstraImplementation()
     }
 
     delete[] distance;
+    delete[] distanceList;
     delete[] visited;
+    delete[] visitedList;
     delete[] graphMatrix;
     delete[] graphList;
 }
@@ -85,6 +87,12 @@ void DijkstraImplementation::printDistances()
         cout<<distance[i]<<" ";
     }
     cout<<endl;
+    cout<<dijkstraMatrixIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<visited[i]<<" ";
+    }
+    cout<<endl;
 }
 void DijkstraImplementation::initTables()
 {
@@ -97,6 +105,7 @@ void DijkstraImplementation::initTables()
     {
         distance[i] = INF;
         distanceList[i] = INF;
+        visited[i] = false;
         visitedList[i] = false;
     }
     dijkstraMatrixIterations = 0;
@@ -194,6 +203,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
 
     for (int i=0; i<numberOfVertices; i++)
     {
+        //cout<<i<<endl;
         if ((visited[i]==false) && (graphMatrix[vertex][i]!=INF))
         {
             if (distance[i] == INF || ((distance[vertex]+graphMatrix[vertex][i])<distance[i]))
@@ -276,6 +286,7 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
     if (dijkstraListIterations < numberOfVertices && changes != 0)
     {
         printDistancesList();
+        nextVertexSet.clear();
         cout<<"Wykonujemy kolejna petle dla i = "<<smallestAvailableVertex<<endl;
         dijkstraAlgorithmList(smallestAvailableVertex);
     }
