@@ -292,11 +292,11 @@ long long int DijkstraImplementation::startDijkstraMatrix()
 
     dijkstraAlgorithmMatrix(0);
 
-    elapsed = read_QPC() - start; // koniec pomiaru czasu jesli nie znaleziono szukanej wartosci
+    elapsed = read_QPC() - start; // koniec pomiaru czasu
 
-    cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
-    cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
-    cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
+    //cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
+    //cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
+    //cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
 
     //return elapsed;
     return ((1000000.0 * elapsed) /frequency);

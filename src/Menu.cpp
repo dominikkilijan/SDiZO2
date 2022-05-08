@@ -59,7 +59,7 @@ Menu::Menu()
             cout<<"3. 75%"<<endl;
             cout<<"4. 99%"<<endl;
             //cin>>edgeDensity;
-            edgeDensity = 3;
+            edgeDensity = 1;
             srand(time(NULL));
             generateRandomGraph();
         }
