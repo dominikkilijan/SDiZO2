@@ -3,6 +3,9 @@
 #include "Menu.h"
 #include "DijkstraImplementation.h"
 
+#include <iomanip>
+#include <windows.h>
+
 using namespace std;
 
 ShortestPathMenu::ShortestPathMenu(int fileChoice)
@@ -26,8 +29,34 @@ ShortestPathMenu::ShortestPathMenu(int fileChoice)
         {
         case 1:
             {
+            long long int matrixTime = 0;
+            long long int listTime = 0;
             cout<<"Algorytm Dijkstry"<<endl;
+            /*for (int i = 0; i < 2; i++ )
+            {
+            // macierz
             DijkstraImplementation dijkstra(fileChoice);
+            dijkstra.getFileInfo();
+            dijkstra.printMatrix();
+            dijkstra.initTables();
+            matrixTime += dijkstra.startDijkstraMatrix();
+            dijkstra.printDistances();
+            }*/
+            for (int i = 0; i < 2; i++ )
+            {
+            // lista
+            DijkstraImplementation dijkstra(fileChoice);
+            dijkstra.getFileInfo();
+            dijkstra.printList();
+            dijkstra.initTables();
+            listTime += dijkstra.startDijkstraList();
+            dijkstra.printDistancesList();
+            }
+            //cout << "Time [s] = " << fixed << setprecision(3) << (float)matrixTime /frequency << endl;
+            //cout << "Time [ms] = " << setprecision(0) << (1000.0 * matrixTime) /frequency << endl;
+            //cout << "Time [us] = " << setprecision(0) << (1000000.0 * matrixTime) /frequency << endl << endl;
+            cout << "Matrix Time [us] = " << setprecision(0) << matrixTime/2 << endl << endl;
+            cout << "List Time [us] = " << setprecision(0) << listTime/2 << endl << endl;
             //delete this;
             }
             break;
@@ -55,4 +84,11 @@ ShortestPathMenu::ShortestPathMenu(int fileChoice)
 ShortestPathMenu::~ShortestPathMenu()
 {
     //dtor
+}
+long long int ShortestPathMenu::read_QPC()
+{
+    LARGE_INTEGER count;
+
+    QueryPerformanceCounter(&count);
+    return ((long long int)count.QuadPart);
 }

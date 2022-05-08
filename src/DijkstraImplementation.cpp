@@ -18,29 +18,26 @@ DijkstraImplementation::DijkstraImplementation(int wF)
 {
     // macierz
     whichFile = wF;
-    getFileInfo();
-    cout<<"Graf z pliku"<<endl;
-
+        //getFileInfo();
     //dijkstraAlgorithmMatrix(0);
-
-    printMatrix();
-    initTables();
-    printDistances();
-    startDijkstraMatrix();
-    printDistances();
-    printPrevious();
-    printVisited();
+    //printMatrix();
+        //initTables();
+    //printDistances();
+        //startDijkstraMatrix();
+    //printDistances();
+    //printPrevious();
+    //printVisited();
 
     cout<<"======================================================================================================================"<<endl;
     // lista
-    getFileInfo();
-    printList();
-    initTables();
-    printDistancesList();
-    startDijkstraList();
-    printDistancesList();
-    printPreviousList();
-    printVisitedList();
+        //getFileInfo();
+    //printList();
+        //initTables();
+    //printDistancesList();
+        //startDijkstraList();
+    //printDistancesList();
+    //printPreviousList();
+    //printVisitedList();
 
 }
 //==========================================================================================================================================
@@ -279,7 +276,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
     }
     if (dijkstraMatrixIterations < numberOfVertices && changes != 0)
     {
-        printDistances();
+        //printDistances();
         dijkstraAlgorithmMatrix(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
@@ -288,7 +285,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
 
 
 }
-void DijkstraImplementation::startDijkstraMatrix()
+long long int DijkstraImplementation::startDijkstraMatrix()
 {
     QueryPerformanceFrequency((LARGE_INTEGER *)&frequency);
     start = read_QPC();  // poczatek pomiaru czasu
@@ -300,6 +297,9 @@ void DijkstraImplementation::startDijkstraMatrix()
     cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
     cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
     cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
+
+    //return elapsed;
+    return ((1000000.0 * elapsed) /frequency);
 }
 //------------------------------------------------------------------------------------------------------------------------------------------
 void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijkstry dla listy
@@ -355,13 +355,13 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
     }
     if (dijkstraListIterations < numberOfVertices && changes != 0)
     {
-        printDistancesList();
+        //printDistancesList();
         nextVertexSet.clear();
         dijkstraAlgorithmList(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Dijkstry dla listy\n";
 }
-void DijkstraImplementation::startDijkstraList()
+long long int DijkstraImplementation::startDijkstraList()
 {
     QueryPerformanceFrequency((LARGE_INTEGER *)&frequency);
     start = read_QPC();  // poczatek pomiaru czasu
@@ -370,7 +370,9 @@ void DijkstraImplementation::startDijkstraList()
 
     elapsed = read_QPC() - start; // koniec pomiaru czasu jesli nie znaleziono szukanej wartosci
 
-    cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
-    cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
-    cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
+    //cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
+    //cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
+    //cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
+
+    return ((1000000.0 * elapsed) /frequency);
 }

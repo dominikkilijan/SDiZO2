@@ -32,8 +32,8 @@ class DijkstraImplementation
         void initTables();
         void addToListVector(int,int,int);
         long long int read_QPC();
-        void startDijkstraMatrix();
-        void startDijkstraList();
+        long long int startDijkstraMatrix();
+        long long int startDijkstraList();
 
     protected:
 

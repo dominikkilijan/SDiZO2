@@ -36,7 +36,8 @@ Menu::Menu()
         cout << "3. Koniec programu "<<endl;
         cout << "------------------------------------------"<<endl;
         cout << "Wybor: ";
-        cin >> choice;
+        //cin >> choice;
+        choice = 1;
         //system("cls"); // czyszczenie konsoli
 
         if (choice == 1 || choice == 2)
@@ -44,18 +45,21 @@ Menu::Menu()
         cout<<"Wczytac graf:"<<endl;
         cout<<"1. Z pliku"<<endl;
         cout<<"2. Wygenerowac losowo"<<endl;
-        cin>>fileChoice;
+        //cin>>fileChoice;
+        fileChoice = 2;
 
         if (fileChoice == 2)
         {
             cout<<"Ile wierzcholkow"<<endl;
-            cin>>numVert;
+            //cin>>numVert;
+            numVert = 50;
             cout<<"Jaka gestosc?"<<endl;
             cout<<"1. 25%"<<endl;
             cout<<"2. 50%"<<endl;
             cout<<"3. 75%"<<endl;
             cout<<"4. 99%"<<endl;
-            cin>>edgeDensity;
+            //cin>>edgeDensity;
+            edgeDensity = 1;
             srand(time(NULL));
             generateRandomGraph();
         }
@@ -140,7 +144,8 @@ void Menu::generateRandomGraph()
     // tworzenie tablicy ktora przechowuje wszystkie mozliwe kombinacje wierzcholek-wierzcholek dla podanej ilosci
     // np 0-1, 0-2, 3-4 itd. Zawsze mniejsze do wiekszego
     edgeOptionsTable = new EdgeOptions[numEdgesMax];
-    int i,j,k;
+    int i,j;
+    int k = 0;
     for (i = 0; i < numEdgesMax; i++)
     {
 
@@ -164,7 +169,7 @@ void Menu::generateRandomGraph()
     for (int i = 0; i < numEdges; i++)
     {
         int edge = (rand()%99)+1;
-        cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
+        //cout<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
         fileWrite<<edgeOptionsTable[i].v1<<" "<<edgeOptionsTable[i].v2<<" "<<edge<<"\n";
     }
     fileWrite.close();

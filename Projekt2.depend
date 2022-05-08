@@ -4,7 +4,7 @@
 	"Menu.h"
 	<bits/stdc++.h>
 
-1652014738 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1652040875 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
@@ -13,7 +13,7 @@
 	<iomanip>
 	<windows.h>
 
-1652014423 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+1652036758 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
 	<list>
 	<vector>
 	"ListElement.h"
@@ -44,13 +44,15 @@
 
 1651167754 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primaimplementation.h
 
-1652009779 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
+1652040678 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
 	<iostream>
 	"ShortestPathMenu.h"
 	"Menu.h"
 	"DijkstraImplementation.h"
+	<iomanip>
+	<windows.h>
 
-1652009728 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\shortestpathmenu.h
+1652036689 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\shortestpathmenu.h
 
 1652011046 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\menu.cpp
 	<iostream>
