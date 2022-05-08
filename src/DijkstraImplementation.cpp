@@ -28,7 +28,7 @@ DijkstraImplementation::DijkstraImplementation(int wF)
     //printPrevious();
     //printVisited();
 
-    cout<<"======================================================================================================================"<<endl;
+    //cout<<"======================================================================================================================"<<endl;
     // lista
         //getFileInfo();
     //printList();
@@ -203,7 +203,7 @@ void DijkstraImplementation::getFileInfo() // odczytywanie wartosci z pliku do n
 
     int val;
 
-    cout<<"Wybrano plik do wczytania"<<endl;
+    //cout<<"Wybrano plik do wczytania"<<endl;
     if(file.is_open())
     {
     file >> numberOfEdges >> numberOfVertices;
@@ -279,7 +279,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
         //printDistances();
         dijkstraAlgorithmMatrix(smallestAvailableVertex);
     }
-    else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
+    //else cout<<"\nKoniec algorytmu Dijkstry dla macierzy\n";
 
 
 
@@ -359,7 +359,7 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
         nextVertexSet.clear();
         dijkstraAlgorithmList(smallestAvailableVertex);
     }
-    else cout<<"\nKoniec algorytmu Dijkstry dla listy\n";
+    //else cout<<"\nKoniec algorytmu Dijkstry dla listy\n";
 }
 long long int DijkstraImplementation::startDijkstraList()
 {

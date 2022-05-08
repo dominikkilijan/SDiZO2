@@ -42,21 +42,21 @@ ShortestPathMenu::ShortestPathMenu(int fileChoice)
             matrixTime += dijkstra.startDijkstraMatrix();
             dijkstra.printDistances();
             }*/
-            for (int i = 0; i < 2; i++ )
+            for (int i = 0; i < 100; i++ )
             {
             // lista
             DijkstraImplementation dijkstra(fileChoice);
             dijkstra.getFileInfo();
-            dijkstra.printList();
+            //dijkstra.printList();
             dijkstra.initTables();
             listTime += dijkstra.startDijkstraList();
-            dijkstra.printDistancesList();
+            //dijkstra.printDistancesList();
             }
             //cout << "Time [s] = " << fixed << setprecision(3) << (float)matrixTime /frequency << endl;
             //cout << "Time [ms] = " << setprecision(0) << (1000.0 * matrixTime) /frequency << endl;
             //cout << "Time [us] = " << setprecision(0) << (1000000.0 * matrixTime) /frequency << endl << endl;
-            cout << "Matrix Time [us] = " << setprecision(0) << matrixTime/2 << endl << endl;
-            cout << "List Time [us] = " << setprecision(0) << listTime/2 << endl << endl;
+            cout << "Matrix Time [us] = " << setprecision(0) << matrixTime/100 << endl << endl;
+            cout << "List Time [us] = " << setprecision(0) << listTime/100 << endl << endl;
             //delete this;
             }
             break;
