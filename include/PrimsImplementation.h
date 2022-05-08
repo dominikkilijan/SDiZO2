@@ -30,6 +30,8 @@ class PrimsImplementation
         void printVisitedList();
         void initTables();
         void addToListVector(int,int,int);
+        void printSum();
+        void printSumList();
 
     protected:
 

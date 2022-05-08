@@ -4,14 +4,14 @@
 	"Menu.h"
 	<bits/stdc++.h>
 
-1651964892 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1652000866 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
 	<list>
 	<algorithm>
 
-1651965451 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+1652000739 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
 	<list>
 	<vector>
 	"ListElement.h"
@@ -67,7 +67,7 @@
 
 1651964531 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\listelement.h
 
-1651998340 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
+1652001687 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
 	<iostream>
 	"PrimsImplementation.h"
 	<fstream>
@@ -75,7 +75,7 @@
 	<algorithm>
 	"ListElement.h"
 
-1651999686 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
+1652001489 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
 	<list>
 	<vector>
 	"ListElement.h"

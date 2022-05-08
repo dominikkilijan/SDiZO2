@@ -26,6 +26,7 @@ PrimsImplementation::PrimsImplementation(int wF)
     printDistances();
     printPrevious();
     printVisited();
+    printSum();
     cout<<"===================================================================================================================="<<endl;
     // lista
     getFileInfo();
@@ -36,6 +37,7 @@ PrimsImplementation::PrimsImplementation(int wF)
     printDistancesList();
     printPreviousList();
     printVisitedList();
+    printSumList();
 
 }
 //==========================================================================================================================================
@@ -112,6 +114,16 @@ void PrimsImplementation::printVisited()
     }
     cout<<endl;
 }
+void PrimsImplementation::printSum()
+{
+    int sum = 0;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        sum += distance[i];
+    }
+    cout<<"Suma krawedzi w drzewie = "<<sum<<endl;
+}
+//==========================================================================================================================================
 void PrimsImplementation::initTables()
 {
     distance = new int[numberOfVertices];
@@ -170,7 +182,7 @@ void PrimsImplementation::printDistancesList()
 }
 void PrimsImplementation::printPreviousList()
 {
-    cout<<primsMatrixIterations+1<<". "<<"Poprzednie wierzcholki:"<<endl;
+    cout<<primsListIterations+1<<". "<<"Poprzednie wierzcholki:"<<endl;
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<previousVertexList[i]<<" ";
@@ -185,6 +197,15 @@ void PrimsImplementation::printVisitedList()
         cout<<visitedList[i]<<" ";
     }
     cout<<endl;
+}
+void PrimsImplementation::printSumList()
+{
+    int sum = 0;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        sum += distanceList[i];
+    }
+    cout<<"Suma krawedzi w drzewie = "<<sum<<endl;
 }
 //==========================================================================================================================================
 void PrimsImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowej tablicy

@@ -22,6 +22,7 @@ DijkstraImplementation::DijkstraImplementation(int wF)
     printDistances();
     dijkstraAlgorithmMatrix(0);
     printDistances();
+    printPrevious();
     printVisited();
     cout<<"======================================================================================================================"<<endl;
     // lista
@@ -31,6 +32,7 @@ DijkstraImplementation::DijkstraImplementation(int wF)
     printDistancesList();
     dijkstraAlgorithmList(0);
     printDistancesList();
+    printPreviousList();
     printVisitedList();
 
 }
@@ -90,6 +92,15 @@ void DijkstraImplementation::printDistances()
     }
     cout<<endl;
 }
+void DijkstraImplementation::printPrevious()
+{
+    cout<<dijkstraMatrixIterations+1<<". "<<"Poprzednie wierzcholki:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<previousVertex[i]<<" ";
+    }
+    cout<<endl;
+}
 void DijkstraImplementation::printVisited()
 {
     cout<<dijkstraMatrixIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
@@ -105,6 +116,8 @@ void DijkstraImplementation::initTables()
     distanceList = new int[numberOfVertices];
     visited = new bool[numberOfVertices];
     visitedList = new bool[numberOfVertices];
+    previousVertex = new int[numberOfVertices];
+    previousVertexList = new int[numberOfVertices];
 
     for (int i = 0; i < numberOfVertices; i++)
     {
@@ -117,6 +130,8 @@ void DijkstraImplementation::initTables()
     dijkstraListIterations = 0;
     distance[0] = 0;
     distanceList[0] = 0;
+    previousVertex[0] = 0;
+    previousVertexList[0] = 0;
 }
 //==========================================================================================================================================
 void DijkstraImplementation::addToListVector(int source, int nextE, int edgeV)
@@ -146,6 +161,15 @@ void DijkstraImplementation::printDistancesList()
     for (int i = 0; i < numberOfVertices; i++)
     {
         cout<<distanceList[i]<<" ";
+    }
+    cout<<endl;
+}
+void DijkstraImplementation::printPreviousList()
+{
+    cout<<dijkstraListIterations+1<<". "<<"Poprzednie wierzcholki:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<previousVertexList[i]<<" ";
     }
     cout<<endl;
 }
@@ -221,6 +245,7 @@ void DijkstraImplementation::dijkstraAlgorithmMatrix(int vertex) // algorytm Dij
             if (distance[i] == INF || ((distance[vertex]+graphMatrix[vertex][i])<distance[i]))
             {
                 distance[i] = distance[vertex] + graphMatrix[vertex][i];
+                previousVertex[i] = vertex;
                 changes++;
             }
         }
@@ -277,6 +302,7 @@ void DijkstraImplementation::dijkstraAlgorithmList(int vertex) // algorytm Dijks
                 if (((distanceList[vertex]+(ite->edgeValue))<distanceList[i]) || (distanceList[i] == INF))
                 {
                     distanceList[i] = distanceList[vertex] + ite->edgeValue;
+                    previousVertexList[i] = vertex;
                     changes++;
                 }
             }
