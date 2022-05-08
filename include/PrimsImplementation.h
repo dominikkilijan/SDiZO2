@@ -24,6 +24,8 @@ class PrimsImplementation
         void primsAlgorithmList(int);
         void printDistances();
         void printDistancesList();
+        void printPrevious();
+        void printPreviousList();
         void printVisited();
         void printVisitedList();
         void initTables();
@@ -40,6 +42,8 @@ class PrimsImplementation
         int *distanceList;
         bool *visited;
         bool *visitedList;
+        int *previousVertex;
+        int *previousVertexList;
         int primsMatrixIterations;
         int primsListIterations;
 

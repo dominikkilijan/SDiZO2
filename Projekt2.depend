@@ -67,7 +67,7 @@
 
 1651964531 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\listelement.h
 
-1651965451 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
+1651998340 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
 	<iostream>
 	"PrimsImplementation.h"
 	<fstream>
@@ -75,7 +75,7 @@
 	<algorithm>
 	"ListElement.h"
 
-1651965246 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
+1651999686 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
 	<list>
 	<vector>
 	"ListElement.h"

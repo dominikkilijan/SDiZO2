@@ -37,6 +37,7 @@
 		<Unit filename="include/BellmanFordImplementation.h" />
 		<Unit filename="include/DijkstraImplementation.h" />
 		<Unit filename="include/KruskalImplementation.h" />
+		<Unit filename="include/ListElement.h" />
 		<Unit filename="include/MSTMenu.h" />
 		<Unit filename="include/Menu.h" />
 		<Unit filename="include/PrimsImplementation.h" />
@@ -45,6 +46,7 @@
 		<Unit filename="src/BellmanFordImplementation.cpp" />
 		<Unit filename="src/DijkstraImplementation.cpp" />
 		<Unit filename="src/KruskalImplementation.cpp" />
+		<Unit filename="src/ListElement.cpp" />
 		<Unit filename="src/MSTMenu.cpp" />
 		<Unit filename="src/Menu.cpp" />
 		<Unit filename="src/PrimsImplementation.cpp" />

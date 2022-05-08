@@ -24,6 +24,7 @@ PrimsImplementation::PrimsImplementation(int wF)
     printDistances();
     primsAlgorithmMatrix(0);
     printDistances();
+    printPrevious();
     printVisited();
     cout<<"===================================================================================================================="<<endl;
     // lista
@@ -33,6 +34,7 @@ PrimsImplementation::PrimsImplementation(int wF)
     printDistancesList();
     primsAlgorithmList(0);
     printDistancesList();
+    printPreviousList();
     printVisitedList();
 
 }
@@ -92,6 +94,15 @@ void PrimsImplementation::printDistances()
     }
     cout<<endl;
 }
+void PrimsImplementation::printPrevious()
+{
+    cout<<primsMatrixIterations+1<<". "<<"Poprzednie wierzcholki:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<previousVertex[i]<<" ";
+    }
+    cout<<endl;
+}
 void PrimsImplementation::printVisited()
 {
     cout<<primsMatrixIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
@@ -107,11 +118,15 @@ void PrimsImplementation::initTables()
     distanceList = new int[numberOfVertices];
     visited = new bool[numberOfVertices];
     visitedList = new bool[numberOfVertices];
+    previousVertex = new int[numberOfVertices];
+    previousVertexList = new int[numberOfVertices];
 
     for (int i = 0; i < numberOfVertices; i++)
     {
         distance[i] = INF;
         distanceList[i] = INF;
+        previousVertex[i] = INF;
+        previousVertexList[i] = INF;
         visited[i] = false;
         visitedList[i] = false;
     }
@@ -119,6 +134,8 @@ void PrimsImplementation::initTables()
     primsListIterations = 0;
     distance[0] = 0;
     distanceList[0] = 0;
+    previousVertex[0] = 0;
+    previousVertexList[0] = 0;
 }
 //==========================================================================================================================================
 void PrimsImplementation::addToListVector(int source, int nextE, int edgeV)
@@ -151,6 +168,15 @@ void PrimsImplementation::printDistancesList()
     }
     cout<<endl;
 }
+void PrimsImplementation::printPreviousList()
+{
+    cout<<primsMatrixIterations+1<<". "<<"Poprzednie wierzcholki:"<<endl;
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        cout<<previousVertexList[i]<<" ";
+    }
+    cout<<endl;
+}
 void PrimsImplementation::printVisitedList()
 {
     cout<<primsListIterations+1<<". "<<"Odwiedzone wierzcholki:"<<endl;
@@ -165,7 +191,7 @@ void PrimsImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowe
 {
 
     if (whichFile == 2) primsFile.open("GraphRandom.txt", ios::in);
-    else primsFile.open("Graph1.txt", ios::in);
+    else primsFile.open("Graph2.txt", ios::in);
 
     int val;
 
@@ -211,7 +237,7 @@ void PrimsImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowe
 void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla macierzy
 {
     visited[vertex] = true;
-    int changes = 0;
+    //int changes = 0;
     primsMatrixIterations++;
 
     for (int i=0; i<numberOfVertices; i++)
@@ -219,10 +245,11 @@ void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla
         //cout<<i<<endl;
         if ((visited[i]==false) && (graphMatrix[vertex][i]!=INF))
         {
-            if (distance[i] == INF || ((distance[vertex]+graphMatrix[vertex][i])<distance[i]))
+            if (distance[i] == INF || ((graphMatrix[vertex][i])<distance[i]))
             {
-                distance[i] = distance[vertex] + graphMatrix[vertex][i];
-                changes++;
+                distance[i] = graphMatrix[vertex][i];
+                previousVertex[i] = vertex;
+                //changes++;
             }
         }
     }
@@ -237,7 +264,7 @@ void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla
             smallestAvailableVertex = i;
         }
     }
-    if (primsMatrixIterations < numberOfVertices && changes != 0)
+    if (primsMatrixIterations < numberOfVertices/* && changes != 0*/)
     {
         printDistances();
         primsAlgorithmMatrix(smallestAvailableVertex);
@@ -275,9 +302,10 @@ void PrimsImplementation::primsAlgorithmList(int vertex) // algorytm Primy dla l
                     ite++;
                 }
 
-                if (((distanceList[vertex]+(ite->edgeValue))<distanceList[i]) || (distanceList[i] == INF))
+                if (((ite->edgeValue)<distanceList[i]) || (distanceList[i] == INF))
                 {
-                    distanceList[i] = distanceList[vertex] + ite->edgeValue;
+                    distanceList[i] = ite->edgeValue;
+                    previousVertexList[i] = vertex;
                     changes++;
                 }
             }
