@@ -1,10 +1,11 @@
 #include <iostream>
 #include "MSTMenu.h"
 #include "Menu.h"
+#include "PrimsImplementation.h"
 
 using namespace std;
 
-MSTMenu::MSTMenu()
+MSTMenu::MSTMenu(int fileChoice)
 {
         work = 0;
 
@@ -19,13 +20,14 @@ MSTMenu::MSTMenu()
         cout << "------------------------------------------"<<endl;
         cout << "Wybor: ";
         cin >> choice;
-        //system("cls"); // czyszczenie konsoli
+        system("cls"); // czyszczenie konsoli
 
         switch (choice)
         {
         case 1:
             {
             cout<<"Algorytm Prima"<<endl;
+            PrimsImplementation prim(fileChoice);
             //delete this;
             }
             break;

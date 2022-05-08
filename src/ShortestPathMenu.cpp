@@ -1,10 +1,11 @@
 #include <iostream>
 #include "ShortestPathMenu.h"
 #include "Menu.h"
+#include "DijkstraImplementation.h"
 
 using namespace std;
 
-ShortestPathMenu::ShortestPathMenu()
+ShortestPathMenu::ShortestPathMenu(int fileChoice)
 {
         work = 0;
 
@@ -19,13 +20,14 @@ ShortestPathMenu::ShortestPathMenu()
         cout << "------------------------------------------"<<endl;
         cout << "Wybor: ";
         cin >> choice;
-        //system("cls"); // czyszczenie konsoli
+        system("cls"); // czyszczenie konsoli
 
         switch (choice)
         {
         case 1:
             {
             cout<<"Algorytm Dijkstry"<<endl;
+            DijkstraImplementation dijkstra(fileChoice);
             //delete this;
             }
             break;

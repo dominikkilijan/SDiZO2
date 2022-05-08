@@ -31,7 +31,9 @@ class DijkstraImplementation
         void printVisitedList();
         void initTables();
         void addToListVector(int,int,int);
-        //int
+        long long int read_QPC();
+        void startDijkstraMatrix();
+        void startDijkstraList();
 
     protected:
 
@@ -50,6 +52,10 @@ class DijkstraImplementation
         int dijkstraListIterations;
 
         list<ListElement> *graphList;
+
+        long long int frequency;
+        long long int start;
+        long long int elapsed;
 
 
 };

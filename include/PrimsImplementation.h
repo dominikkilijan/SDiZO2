@@ -32,6 +32,9 @@ class PrimsImplementation
         void addToListVector(int,int,int);
         void printSum();
         void printSumList();
+        void startPrimsMatrix();
+        void startPrimsList();
+        long long int read_QPC();
 
     protected:
 
@@ -50,6 +53,10 @@ class PrimsImplementation
         int primsListIterations;
 
         list<ListElement> *primsGraphList;
+
+        long long int frequency;
+        long long int start;
+        long long int elapsed;
 };
 
 #endif // PRIMSIMPLEMENTATION_H

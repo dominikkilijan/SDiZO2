@@ -4,14 +4,16 @@
 	"Menu.h"
 	<bits/stdc++.h>
 
-1652000866 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
+1652014738 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\dijkstraimplementation.cpp
 	<iostream>
 	"DijkstraImplementation.h"
 	<fstream>
 	<list>
 	<algorithm>
+	<iomanip>
+	<windows.h>
 
-1652000739 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
+1652014423 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\dijkstraimplementation.h
 	<list>
 	<vector>
 	"ListElement.h"
@@ -28,12 +30,13 @@
 
 1651167786 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\kruskalimplementation.h
 
-1651656419 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\mstmenu.cpp
+1652011062 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\mstmenu.cpp
 	<iostream>
 	"MSTMenu.h"
 	"Menu.h"
+	"PrimsImplementation.h"
 
-1651311685 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\mstmenu.h
+1652011046 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\mstmenu.h
 
 1651338334 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primaimplementation.cpp
 	<iostream>
@@ -41,14 +44,15 @@
 
 1651167754 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primaimplementation.h
 
-1651942045 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
+1652009779 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\shortestpathmenu.cpp
 	<iostream>
 	"ShortestPathMenu.h"
 	"Menu.h"
+	"DijkstraImplementation.h"
 
-1651311685 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\shortestpathmenu.h
+1652009728 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\shortestpathmenu.h
 
-1651965000 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\menu.cpp
+1652011046 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\menu.cpp
 	<iostream>
 	<fstream>
 	<math.h>
@@ -67,15 +71,17 @@
 
 1651964531 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\listelement.h
 
-1652001687 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
+1652035073 source:d:\studia\pwr\sdizo\p\projekt2\projekt2\src\primsimplementation.cpp
 	<iostream>
 	"PrimsImplementation.h"
 	<fstream>
 	<list>
 	<algorithm>
 	"ListElement.h"
+	<iomanip>
+	<windows.h>
 
-1652001489 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
+1652034373 d:\studia\pwr\sdizo\p\projekt2\projekt2\include\primsimplementation.h
 	<list>
 	<vector>
 	"ListElement.h"

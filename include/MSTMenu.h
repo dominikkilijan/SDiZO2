@@ -5,7 +5,7 @@
 class MSTMenu
 {
     public:
-        MSTMenu();
+        MSTMenu(int);
         virtual ~MSTMenu();
 
     protected:

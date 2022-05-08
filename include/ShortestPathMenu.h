@@ -5,7 +5,7 @@
 class ShortestPathMenu
 {
     public:
-        ShortestPathMenu();
+        ShortestPathMenu(int);
         virtual ~ShortestPathMenu();
 
     protected:

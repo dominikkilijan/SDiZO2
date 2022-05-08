@@ -3,8 +3,9 @@
 #include <fstream>
 #include <list>
 #include <algorithm>
-
 #include "ListElement.h"
+#include <iomanip>
+#include <windows.h>
 
 #define INF -1
 
@@ -22,7 +23,7 @@ PrimsImplementation::PrimsImplementation(int wF)
     printMatrix();
     initTables();
     printDistances();
-    primsAlgorithmMatrix(0);
+    startPrimsMatrix();
     printDistances();
     printPrevious();
     printVisited();
@@ -33,7 +34,7 @@ PrimsImplementation::PrimsImplementation(int wF)
     printList();
     initTables();
     printDistancesList();
-    primsAlgorithmList(0);
+    startPrimsList();
     printDistancesList();
     printPreviousList();
     printVisitedList();
@@ -55,6 +56,14 @@ PrimsImplementation::~PrimsImplementation()
     delete[] visitedList;
     delete[] graphMatrix;
     delete[] primsGraphList;
+}
+//==========================================================================================================================================
+long long int PrimsImplementation::read_QPC()
+{
+    LARGE_INTEGER count;
+
+    QueryPerformanceCounter(&count);
+    return ((long long int)count.QuadPart);
 }
 //==========================================================================================================================================
 void PrimsImplementation::createGraphMatrix()
@@ -258,7 +267,6 @@ void PrimsImplementation::getFileInfo() // odczytywanie wartosci z pliku do nowe
 void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla macierzy
 {
     visited[vertex] = true;
-    //int changes = 0;
     primsMatrixIterations++;
 
     for (int i=0; i<numberOfVertices; i++)
@@ -270,7 +278,6 @@ void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla
             {
                 distance[i] = graphMatrix[vertex][i];
                 previousVertex[i] = vertex;
-                //changes++;
             }
         }
     }
@@ -285,18 +292,30 @@ void PrimsImplementation::primsAlgorithmMatrix(int vertex) // algorytm Primy dla
             smallestAvailableVertex = i;
         }
     }
-    if (primsMatrixIterations < numberOfVertices/* && changes != 0*/)
+    if (primsMatrixIterations < numberOfVertices)
     {
         printDistances();
         primsAlgorithmMatrix(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Primy dla macierzy\n";
 }
+void PrimsImplementation::startPrimsMatrix()
+{
+    QueryPerformanceFrequency((LARGE_INTEGER *)&frequency);
+    start = read_QPC();  // poczatek pomiaru czasu
+
+    primsAlgorithmMatrix(0);
+
+    elapsed = read_QPC() - start; // koniec pomiaru czasu jesli nie znaleziono szukanej wartosci
+
+    cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
+    cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
+    cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
+}
 //------------------------------------------------------------------------------------------------------------------------------------------
 void PrimsImplementation::primsAlgorithmList(int vertex) // algorytm Primy dla listy
 {
     visitedList[vertex] = true;
-    int changes = 0;
     primsListIterations++;
     vector<int> nextVertexSet;
     // Deklaracja iteratora
@@ -327,7 +346,6 @@ void PrimsImplementation::primsAlgorithmList(int vertex) // algorytm Primy dla l
                 {
                     distanceList[i] = ite->edgeValue;
                     previousVertexList[i] = vertex;
-                    changes++;
                 }
             }
         }
@@ -344,11 +362,24 @@ void PrimsImplementation::primsAlgorithmList(int vertex) // algorytm Primy dla l
             smallestAvailableVertex = i;
         }
     }
-    if (primsListIterations < numberOfVertices && changes != 0)
+    if (primsListIterations < numberOfVertices)
     {
         printDistancesList();
         nextVertexSet.clear();
         primsAlgorithmList(smallestAvailableVertex);
     }
     else cout<<"\nKoniec algorytmu Primy dla listy\n";
+}
+void PrimsImplementation::startPrimsList()
+{
+    QueryPerformanceFrequency((LARGE_INTEGER *)&frequency);
+    start = read_QPC();  // poczatek pomiaru czasu
+
+    primsAlgorithmList(0);
+
+    elapsed = read_QPC() - start; // koniec pomiaru czasu jesli nie znaleziono szukanej wartosci
+
+    cout << "Time [s] = " << fixed << setprecision(3) << (float)elapsed /frequency << endl;
+    cout << "Time [ms] = " << setprecision(0) << (1000.0 * elapsed) /frequency << endl;
+    cout << "Time [us] = " << setprecision(0) << (1000000.0 * elapsed) /frequency << endl << endl;
 }

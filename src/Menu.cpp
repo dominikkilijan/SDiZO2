@@ -66,17 +66,15 @@ Menu::Menu()
         case 1:
             {
             cout<<"fileChoice = "<<fileChoice<<endl;
-            DijkstraImplementation dijkstra(fileChoice);
-            ShortestPathMenu shortMenu;
+            ShortestPathMenu shortMenu(fileChoice);
             //delete this;
             }
             break;
 
         case 2:
             {
-            PrimsImplementation prim(fileChoice);
-            MSTMenu mstMenu;
-            delete this;
+            MSTMenu mstMenu(fileChoice);
+            //delete this;
             }
             break;
 
