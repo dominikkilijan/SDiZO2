@@ -31,9 +31,9 @@ Menu::Menu()
         int choice=0; // wybor struktury
         cout << endl<<"MENU GLOWNE:"<<endl;
         cout << "------------------------------------------"<<endl;
-        cout << "1. Najkrotsza sciezka "<<endl;
+        cout << "1. "<<endl;
         cout << "2. MST "<<endl;
-        cout << "3. Koniec programu "<<endl;
+        cout << "3. Koniec protgbhtfvfdddghhgramu "<<endl;
         cout << "------------------------------------------"<<endl;
         cout << "Wybor: ";
         //cin >> choice;
